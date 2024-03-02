@@ -20,8 +20,8 @@
 		<!-- Custom CSS -->
 		<link href="assets/includes/css/styles.css" rel="stylesheet">
 		
-		<script type="text/javascript" src="assets/js/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="assets/js/custom.js"></script>
+		<script type="text/javascript" src="assets/includes/js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="assets/includes/js/custom.js"></script>
 
 	</head>
 	<body>
@@ -30,7 +30,7 @@
 
 			<div class="container" align="center">
 			 <form class="form-signin"  method="post" action="<%= request.getContextPath() %>/login">
-			        <h2 class="form-signin-heading">Employee sign in</h2>
+			        <h2 class="form-signin-heading">Representative Sign In</h2>
 			        <label class="sr-only">User Name</label>
 			        <input type="text" id="inputUserName" class="form-control" placeholder="User Name" name="userName" required autofocus>
 			        <br></br>

@@ -21,8 +21,8 @@
 		<link href="assets/includes/css/signin.css" rel="stylesheet">
 		
 		<!-- JavaScripts -->
-		<script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
-		<script type="text/javascript" src="resources/js/modernizr-2.6.2.js"></script>
+		<script type="text/javascript" src="assets/includes/js/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="assets/includes/js/modernizr-2.6.2.js"></script>
 	</head>
 	<body>
 	
@@ -73,7 +73,7 @@
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	
 	<!-- Custom JS 
-	<script src="resources//includes/js/script.js"></script> -->
+	<script src="assets/includes/js/script.js"></script> -->
 	
 	</body>
 </html>
