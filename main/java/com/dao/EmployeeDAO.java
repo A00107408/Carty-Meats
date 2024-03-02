@@ -5,11 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
+import java.util.List;
+import java.util.ArrayList;
 
 import com.model.Employee;
-
-
-//import com.placements.Employee;
 
 public class EmployeeDAO {
 
@@ -75,7 +76,90 @@ public class EmployeeDAO {
 	      e.printStackTrace();
 	    }
 	    return employee;
-	  }
+	}
+	
+	public List<Employee> getAllEmployees(){
+
+		Connection connection = getConnection();
+	    
+		List<Employee> employeeList = new ArrayList<Employee>();
+	    
+		try {
+	    	Statement statement = connection.createStatement();
+	        ResultSet rs = statement.executeQuery("select * from employee");
+	        while (rs.next()) {
+	        	Employee employee = null;
+	        	employee = new Employee(rs.getString("first_Name"), rs.getString("last_Name"), rs.getString("userName"), rs.getString("passwrd"), rs.getString("address"), rs.getString("contact"));
+	        	if(employee.getFirstName() == null) {
+	        		System.out.println("Didnt get any employees.");
+	        	}
+	        	employeeList.add(employee);
+	        }
+	    }catch (SQLException e) {
+	    	System.out.println("Exception: "+e);
+	    }    
+	    return employeeList;
+	}
+	
+	public void deleteEmployee(String username) {
+	  			
+		Connection connection = getConnection();
+		try {
+	      
+			PreparedStatement preparedStatement = connection.prepareStatement("delete from employee where username=?");
+	      
+			// Parameters start with 1
+			preparedStatement.setString(1, username);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}	
+  
+	public Employee getEmployeeByUsername(String username) {
+		
+		Connection connection = getConnection();
+    	Employee employee = null;
+        
+    	try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("select * from employee where username=?");
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+            	employee = new Employee(rs.getString("first_name"), rs.getString("last_name"), rs.getString("username"), rs.getString("passwrd"), rs.getString("address"), rs.getString("contact"));            	
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return employee;
+    }
+	
+	public void updateEmployee(Employee employee) {
+		    	
+		Connection connection = getConnection();
+        
+		try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("update employee set first_name=?, last_name=?, username=?, passwrd=?, address=?, contact=?" +
+                            "where username=?");
+            // Parameters start with 1
+            preparedStatement.setString(1, employee.getFirstName());
+            preparedStatement.setString(2, employee.getLastName());
+            preparedStatement.setString(3, employee.getUsername());
+            preparedStatement.setString(4, employee.getPassword());
+            preparedStatement.setString(5, employee.getAddress());
+            preparedStatement.setString(6, employee.getContact());
+            preparedStatement.setString(7, employee.getUsername());
+     
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 	
 	private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
