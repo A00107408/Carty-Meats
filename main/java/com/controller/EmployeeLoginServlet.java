@@ -1,7 +1,6 @@
 package com.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,14 +49,11 @@ public class EmployeeLoginServlet extends HttpServlet {
 		
 		Employee employee = EmployeeDAO.checkLogin(userName, password);
 		if (employee != null) {
-			System.out.println("Yes password matched");
 		    HttpSession session = request.getSession();
 		    session.setAttribute("employee", employee);
-		    //request.getRequestDispatcher("success.jsp").forward(request, response);
-		    //response.sendRedirect("EmployeeAfterLogin?action=listUser");
-		    response.sendRedirect("views/success.jsp");
+		    response.sendRedirect("EmployeeAfterLogin?action=listUser");
 		} else {
-		    request.getRequestDispatcher("views/nosuccess.jsp").forward(request, response);
+		    request.getRequestDispatcher("index.xhtml").forward(request, response);
 		    System.out.println("No match found in DB");
 		}
 	}

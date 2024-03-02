@@ -60,8 +60,8 @@ public class EmployeeRegisterServlet extends HttpServlet {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        response.sendRedirect("views/employeedetails.jsp");
+        
+        response.sendRedirect("EmployeeAfterLogin?action=listUser");
 	}
 
 }
